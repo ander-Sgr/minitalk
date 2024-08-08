@@ -33,7 +33,7 @@ char    binary_to_char(const char *binary)
     return ch;
 }
 
-void    signal_hanlder(int signal)
+void    signal_handler(int signal)
 {
     if (signal == SIGUSR1)
         binary[it] = '1';
@@ -43,12 +43,8 @@ void    signal_hanlder(int signal)
     if (it == 8)
     {
         binary[8] = '\0';
-
         char ch = binary_to_char(binary);
-        if (binary[8] == '\0')
-            ft_printf("\n");
-        else
-            ft_printf("%c", ch);
+        ft_printf("%c", ch);
         it = 0;
     }
 }
@@ -59,7 +55,7 @@ int main(void)
     pid_t               pid;
 
     sa.sa_sigaction = NULL;
-    sa.sa_handler = signal_hanlder;
+    sa.sa_handler = signal_handler;
     sa.sa_flags = 0;
     sigemptyset(&sa.sa_mask);
 

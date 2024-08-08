@@ -20,10 +20,22 @@ void    sendBinary(pid_t pid, const char *binary)
     while (i < 8)
     {
         if (binary[i] == '1')
-            kill(pid, SIGUSR1);
-        else
-            kill(pid, SIGUSR2);
-        usleep(10000);
+        {
+            if (kill(pid, SIGUSR1) == -1)
+            {
+                ft_printf("Error sending SIGUSR1\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+         else
+        {
+            if(kill(pid, SIGUSR2) == -1)
+            {
+                ft_printf("Error sending SIGUSR2\n");
+                exit(EXIT_FAILURE);
+            }
+        }
+            usleep(100);
         i++;
     }
 }
@@ -45,7 +57,7 @@ int main(int argc, char *argv[])
 {
     pid_t   pid;
     char    *message;
-    int     i;
+    size_t  i;
     char    binary[9];
 
     if (argc != 3)
@@ -56,6 +68,7 @@ int main(int argc, char *argv[])
     i = 0;
     message = argv[2];
     pid = ft_atoi(argv[1]);
+    ft_printf("Sending message '%s' to PID %d\n", message, pid);
     while (i < ft_strlen(message))
     {
         char_to_bin(message[i], binary);
