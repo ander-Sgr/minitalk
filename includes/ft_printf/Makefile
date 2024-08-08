@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aestrell <aestrell@student.42barcelona.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/03/11 20:24:11 by aestrell          #+#    #+#              #
-#    Updated: 2024/03/11 20:24:11 by aestrell         ###   ########.fr        #
+#    Created: 2024/08/07 23:45:01 by aestrell          #+#    #+#              #
+#    Updated: 2024/08/07 23:45:01 by aestrell         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = libftprintf.a
 LIBFTNAME = libft.a
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra
-LIBFTDIR = ./libft
+LIBFTDIR = ../libft
 SRCS = ft_printf.c \
        ft_put_char.c \
        ft_put_hex.c \
@@ -28,9 +28,6 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-#Esta regla dice que para crear el archivo $(NAME),  
-#primero debe ejecutar el objetivo makelibs (que compila libft) 
-#y luego vincular los archivos objeto $(OBJS)
 $(NAME): makelibs $(OBJS)
 	@ar -r $(NAME) $(OBJS)
 
